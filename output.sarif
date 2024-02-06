@@ -1,0 +1,164 @@
+{
+    "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/errata01/os/schemas/sarif-schema-2.1.0.json",
+    "version": "2.1.0",
+    "runs": [
+        {
+            "tool": {
+                "driver": {
+                    "name": "LibFuzzer",
+                    "version": "18.0.0",
+                    "rules": [
+                        {
+                            "id": "LF0001",
+                            "name": "NEW",
+                            "messageStrings": {
+                                "default": {
+                                    "text": "New coverage found."
+                                }
+                            }
+                        },
+                        {
+                            "id": "LF0002",
+                            "name": "NEW_FUNC",
+                            "messageStrings": {
+                                "default": {
+                                    "text": "New function coverage found."
+                                }
+                            }
+                        },
+                        {
+                            "id": "LF0003",
+                            "name": "NEW_PC",
+                            "messageStrings": {
+                                "default": {
+                                    "text": "New PC coverage found."
+                                }
+                            }
+                        }
+                    ]
+                },
+                "extensions": [
+                    {
+                        "name": "ASAN",
+                        "rules": [
+                            {
+                                "id": "AS0001",
+                                "name": "ASAN",
+                                "messageStrings": {
+                                    "default": {
+                                        "text": "AddressSanitizer: heap-buffer-overflow"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "invocations": [
+                {
+                    "commandLine": "./fuzz_vuln_nosan -verbosity=2 -verbosity=0 -print_pcs=1 -print_funcs=1 -print_final_stats=1 -print_corpus_stats=1 -print_full_coverage=1",
+                    "executionSuccessful": true,
+                    "account": "rhart",
+                    "startTimeUtc": "2024-02-05T22:00:00Z",
+                    "endTimeUtc": "2024-02-05T22:25:00Z",
+                    "machine": "machine",
+                    "workingDirectory": {
+                        "uri": "file:///home/rhart/example"
+                    },
+                    "properties": {
+                        "note": "Also captures stdin/stdout, pid, env, etc."
+                    },
+                    "toolExecutionNotifications": [
+                        {
+                            "associatedRule": {
+                                "id": "LF0002",
+                                "index": 1
+                            },
+                            "timeUtc": "2024-02-05T22:10:00Z",
+                            "level": "note",
+                            "locations": [
+                                {
+                                    "annotations": [
+                                        {
+                                            "startLine": 977,
+                                            "snippet": {
+                                                "text": "void std::__fill_a<char*, char>(char*, char*, char const&)"
+                                            }
+                                        }
+                                    ],
+                                    "physicalLocation": {
+                                        "artifactLocation": {
+                                            "uri": "/usr/bin/../lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/bits/stl_algobase.h"
+                                        }
+                                    }
+                                },
+                                {
+                                    "physicalLocation": {
+                                        "artifactLocation": {
+                                            "uri": "file:///home/rhart/example/corpus/19e8431d46c6bbbc5ce8b39179de6b1ef14d1afa"
+                                        }
+                                    },
+                                    "annotations": [
+                                        {
+                                            "startLine": 1,
+                                            "byteLength": 5
+                                        }
+                                    ]
+                                }
+                            ],
+                            "message": {
+                                "id": "default"
+                            }
+                        },
+                        {
+                            "associatedRule": {
+                                "id": "LF0001",
+                                "index": 0
+                            },
+                            "timeUtc": "2024-02-05T22:15:00Z",
+                            "level": "note",
+                            "message": {
+                                "id": "default"
+                            },
+                            "properties": {
+                                "cov": 62,
+                                "ft": 64,
+                                "corp": "2/3b",
+                                "lim": 4,
+                                "exec/s": 1677721,
+                                "rss": "29Mb"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "results": [
+                {
+                    "rule": {
+                        "id": "AS0001",
+                        "index": 0
+                    },
+                    "message": {
+                        "id": "default"
+                    }
+                }
+            ],
+            "externalPropertyFileReferences": {
+                "results": [
+                    {
+                        "location": {
+                            "uri": "results.sarif-external-properties",
+                            "uriBaseId": "LOGDIR"
+                        },
+                        "itemCount": 1
+                    }
+                ]
+            },
+            "originalUriBaseIds": {
+                "LOGDIR": {
+                    "uri": "file:///home/rhart/example"
+                }
+            }
+        }
+    ]
+}

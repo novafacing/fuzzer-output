@@ -1,0 +1,15 @@
+{
+    "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/errata01/os/schemas/sarif-external-property-file-schema-2.1.0.json",
+    "version": "2.1.0",
+    "results": [
+        {
+            "rule": {
+                "id": "AS0001",
+                "index": 0
+            },
+            "message": {
+                "id": "default"
+            }
+        }
+    ]
+}
