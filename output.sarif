@@ -140,7 +140,23 @@
                     },
                     "message": {
                         "id": "default"
-                    }
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "file:///home/rhart/example/crashes/19e8431d46c6bbbc5ce8b39179de6b1ef14d1afa"
+                                }
+                            },
+                            "annotations": [
+                                {
+                                    "byteLength": 128,
+                                    "startLine": 1,
+                                    "sourceLanguage": "Protobuf"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ],
             "externalPropertyFileReferences": {
